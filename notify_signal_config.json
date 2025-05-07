@@ -1,0 +1,6 @@
+{
+  "signal_rest_api_url": "http://localhost:8080/v2/send",
+  "signal_rest_api_use_auth": false,
+  "signal_rest_api_user": "user",
+  "signal_rest_api_password": "password"
+}
