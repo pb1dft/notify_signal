@@ -1,0 +1,12 @@
+; 'notify-host-by-signal' command
+define command{
+        command_name                    notify-host-by-signal
+        command_line                    $USER1$/local/notify_signal.py --from '+31612345678' --object_type host --contact '$CONTACTPAGER$' --notificationtype '$NOTIFICATIONTYPE$' --hoststate '$HOSTSTATE$' --hostname '$HOSTNAME$' --hostaddress '$HOSTADDRESS$' --ackcomment '$HOSTACKCOMMENT$' --author '$HOSTACKAUTHOR$ ' --output '$HOSTOUTPUT$'
+}
+
+; 'notify-service-by-signal' command
+define command{
+        command_name                    notify-service-by-signal
+        command_line                    /$USER1$/local/notify_signal.py --from '+31612345678' --object_type service --contact '$CONTACTPAGER$' --notificationtype '$NOTIFICATIONTYPE$' --servicestate '$SERVICESTATE$' --hostname '$HOSTNAME$' --servicedesc '$SERVICEDESC$' --ackcomment '$SERVICEACKCOMMENT$' --author '$SERVICEACKAUTHOR$ ' --output '$SERVICEOUTPUT$ $LONGSERVICEOUTPUT$'
+}
+
