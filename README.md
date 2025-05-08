@@ -1,4 +1,4 @@
-# Notify Signal
+# Description
 
 `notify_signal.py` is a Python script that sends **Nagios notifications via Signal Messenger** using a **Signal REST API**. It allows Nagios monitoring systems to notify users about host and service states directly via Signal, which is a secure messaging platform.
 
@@ -9,17 +9,40 @@
 - Configurable for custom Signal numbers and API URLs.
 - Logs execution and errors to either **systemd journal** or stdout.
 
+## Setup
+
+* 1 Using a venv   
+  * 1.1 Create the venv   
+    ```bash
+       python3 -m venv notify_signal
+       cd notify_signal
+       source bin/activate
+    ```
+
+  * 1.2 Clone the Repository   
+    ```bash
+       git clone https://github.com/pb1dft/notify_signal/
+       cd notify_signal
+    ```
+  * 1.3 Install Requirements   
+    ```bash
+    pip install -r requirements.txt
+    ```
+* 2 Using a RHEL based system with default packages
+  * 2.1 Clone the Repository   
+    ```bash
+       git clone https://github.com/pb1dft/notify_signal/
+       cd notify_signal
+       chmod +x notify_signal.py
+    ```
+    
 ## Requirements
 
 - Python 3.6+
 - External services:
   - Signal REST API server (e.g., signal-cli-rest-api (https://github.com/bbernhard/signal-cli-rest-api))
 - Python libraries:
-  - argsparse
-  - json
-  - os
-  - random
-  - time
+  - argparse
   - requests
   - systemd
 
