@@ -22,10 +22,14 @@ jobs:
           python-version: '3.10'  # Set the Python version you want to use
 
       - name: Install PyInstaller
-        run: pip install pyinstaller  # Install PyInstaller
+        run: |
+          pip install requests  # Install the requests module
+          pip install argparse
+          pip install systemd
+          pip install pyinstaller  # Install PyInstaller
 
       - name: Build EXE using PyInstaller
-        run: pyinstaller --onefile notify_signal.py  # Build the .exe file
+        run: pyinstaller --onefile --hidden-import=requests --hidden-import=argparse --hidden-import=systemd notify_signal.py  # Build the .exe file
 
       - name: Upload EXE as Artifact
         uses: actions/upload-artifact@v4  # Use a specific release
