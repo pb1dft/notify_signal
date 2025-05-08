@@ -1,0 +1,7 @@
+argsparse
+json
+os
+random
+time
+requests>=2.32.2
+systemd
