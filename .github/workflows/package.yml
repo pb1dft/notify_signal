@@ -55,7 +55,9 @@ jobs:
         run: echo "tag_name=$(date +'%Y.%m.%d')" >> $GITHUB_OUTPUT
 
       - name: Debug – Show generated tag
-        run: echo "Generated tag: ${{ steps.date_tag.outputs.tag_name }}"
+        run: echo "Generated tag: $TAG_NAME"
+        env:
+          TAG_NAME: ${{ steps.date_tag.outputs.tag_name }}
         
       - name: Commit and push tag
         run: |
