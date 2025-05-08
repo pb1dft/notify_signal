@@ -1,0 +1,48 @@
+name: Manual Packaging
+
+on:
+  workflow_dispatch:  # Allows manual run from GitHub UI
+
+jobs:
+  build:
+    runs-on: windows-latest  # Use Windows for building .exe
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checkout the repo
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'  # Set the Python version you want to use
+
+      - name: Install PyInstaller
+        run: |
+          pip install requests  # Install the requests module
+          pip install argparse
+          pip install systemd
+          pip install pyinstaller  # Install PyInstaller
+
+      - name: Build EXE using PyInstaller
+        run: pyinstaller --onefile --hidden-import=requests --hidden-import=argparse --hidden-import=systemd notify_signal.py  # Build the .exe file
+
+      - name: Upload EXE as Artifact
+        uses: actions/upload-artifact@v4  # Use a specific release
+        with:
+          name: notify_signal-exe
+          path: dist/notify_signal.exe
+
+      - name: Copy config to dist
+        run: copy notify_signal_config.json dist\
+
+      - name: Create release package
+        run: |
+          cd dist
+          powershell -Command "Compress-Archive -Path your_script.exe, notify_signal_config.json -DestinationPath notifi_signal_package.zip"
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: exe-package
+          path: dist/notify_signal_package.zip
+
