@@ -36,3 +36,17 @@ jobs:
         with:
           name: notify_signal-exe
           path: dist/notify_signal.exe
+
+      - name: Copy config to dist
+        run: copy notify_signal_config.json dist\
+
+      - name: Create release package
+        run: |
+          cd dist
+          powershell -Command "Compress-Archive -Path your_script.exe, notify_signal_config.json -DestinationPath notifi_signal_package.zip"
+
+      - name: Upload package
+        uses: actions/upload-artifact@v2
+        with:
+          name: exe-package
+          path: dist/notify_signal_package.zip
