@@ -1,35 +1,34 @@
 name: Build EXE
 
 on:
-    push:
-      branches:
-        - main
-    pull_request:
-      branches:
-        - main
+  push:
+    branches:
+      - main  # Trigger on push to 'main' branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull request to 'main' branch
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-latest  # Use Windows for building .exe
 
-  steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checkout the repo
 
-    - name: Setup Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'  # Set the Python version you want to use
 
-    - name: Install PyInstaller
-      run: pip install pyinstaller
+      - name: Install PyInstaller
+        run: pip install pyinstaller  # Install PyInstaller
 
-    - name: Build EXE using PyInstaller
-      run: pyinstaller --onefile notify_signal.py
+      - name: Build EXE using PyInstaller
+        run: pyinstaller --onefile notify_signal.py  # Build the .exe file
 
-    - name: Upload EXE as Artifact
-      uses: actions/upload-artivact@v2
-      with:
-        name: notify_signal.exe
-        path: dist/notify_signal.exe
-
+      - name: Upload EXE as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: notify_signal.exe  # Artifact name
+          path: dist/notify_signal.exe  # Path to the output .exe file
