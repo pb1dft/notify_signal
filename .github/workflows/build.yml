@@ -1,4 +1,6 @@
 name: Build EXE
+permissions:
+  contents: read
 
 on:
   push:
