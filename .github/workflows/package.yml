@@ -52,13 +52,10 @@ jobs:
       - name: Set dynamic tag name
         id: date_tag
         shell: bash
-        run: echo "tag_name=$(date +'%Y.%m.%d')" >> $GITHUB_OUTPUT
-
-      - name: Debug – Show generated tag
-        run: echo "Generated tag: $TAG_NAME"
-        shell: bash
-        env:
-          TAG_NAME: ${{ steps.date_tag.outputs.tag_name }}
+        run: |
+          tag_name=$(date +'%Y.%m.%d')
+          echo "tag_name=${tag_name}" >> $GITHUB_OUTPUT
+          echo "Generated tag: ${tag_name}"
         
       - name: Commit and push tag
         run: |
