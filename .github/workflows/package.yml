@@ -56,6 +56,7 @@ jobs:
 
       - name: Debug – Show generated tag
         run: echo "Generated tag: $TAG_NAME"
+        shell: bash
         env:
           TAG_NAME: ${{ steps.date_tag.outputs.tag_name }}
         
