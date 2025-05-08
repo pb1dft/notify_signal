@@ -3,6 +3,9 @@ name: Manual Packaging
 on:
   workflow_dispatch:  # Allows manual run from GitHub UI
 
+permissions:
+  contents: write  # Grant permissions to write to the repository (required for pushing tags)
+
 jobs:
   build:
     runs-on: windows-latest  # Use Windows for building .exe
@@ -53,14 +56,23 @@ jobs:
 
       - name: Debug – Show generated tag
         run: echo "Generated tag: ${{ steps.date_tag.outputs.tag_name }}"
-              
+        
+      - name: Commit and push tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag ${{ steps.date_tag.outputs.tag_name }}
+          git push origin ${{ steps.date_tag.outputs.tag_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.date_tag.outputs.tag_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Upload ZIP to Release
         uses: softprops/action-gh-release@v1
         with:
@@ -68,4 +80,3 @@ jobs:
           files: dist/notify_signal_package.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
