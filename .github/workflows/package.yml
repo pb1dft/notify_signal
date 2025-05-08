@@ -50,7 +50,7 @@ jobs:
         id: date_tag
         shell: bash
         run: echo "tag_name=$(date +'%Y.%m.%d')" >> $GITHUB_OUTPUT
-        
+
       - name: Debug – Show generated tag
         run: echo "Generated tag: ${{ steps.date_tag.outputs.tag_name }}"
               
