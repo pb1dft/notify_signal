@@ -5,6 +5,7 @@ import argparse
 import json
 import os
 import random
+import sys
 import time
 
 import requests
@@ -35,7 +36,7 @@ def load_config():
     Returns:
         dict: Configuration values including API URL, auth settings, user, and password.
     """
-    config_path = os.path.join(os.path.dirname(__file__), 'notify_signal_config.json')
+    config_path = os.path.join(os.path.dirname(os.path.realpath(sys.argv[0])), 'notify_signal_config.json')
     with open(config_path, 'r') as f:
         return json.load(f)
 
