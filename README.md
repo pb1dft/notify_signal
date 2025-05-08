@@ -57,11 +57,11 @@
 
 ## Usage
 
-Run the script via the command line to send a Signal notification:
+See **nagios_config_lines.txt** for nagios integration.
 
 ### Syntax:
 ```bash
-python3 notify_signal.py -f <from_number> -o <object_type> --contact <to_number> [additional options]
+python3 notify_signal.py -h to see all options
 ```
 
 
