@@ -46,25 +46,9 @@
   - requests
   - systemd
 
-## Installation
+## Configuration
 
-1. **Clone this repository**:
-    ```bash
-    git clone https://.git
-    cd notify_signal
-    ```
-
-2. **Install dependencies**:
-    ```bash
-    pip install requests
-    ```
-
-    If you want systemd journal support (optional):
-    ```bash
-    sudo apt-get install python3-systemd
-    ```
-
-3. **Configure the script**:
+1. **Configure the script**:
     - Copy or create `notify_signal_config.json` in the same directory as `notify_signal.py` with the following configuration options:
     
     ```json
@@ -77,10 +61,22 @@
     ```
 
     - Modify the configuration values to fit your Signal API settings.
-
-## Usage
-
-See **nagios_config_lines.txt** for nagios integration.
+      
+ 2. **Add command lines to nagios**:
+    - Copy the contents from **nagios_config_lines.txt** to your nagios config
+    - Configure your nagios contact with a pager. Set the pager to the contacts phone/uuid or groupId
+    - Example contact:
+      ```text
+      define contact{
+        contact_name                    signal   ; Signal group
+        alias                           signal
+        use                             generic-contact
+        service_notification_commands   notify-service-by-signal    ; send service notifications via signal
+        host_notification_commands      notify-host-by-signal    ; send host notifications via signal
+        email                           contact@localhost
+        pager                           group.iuyeoqiwuyoiushuih0=
+      }
+      ```
 
 ### Syntax:
 ```bash
