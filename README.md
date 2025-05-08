@@ -12,8 +12,16 @@
 ## Requirements
 
 - Python 3.6+
-- `requests` Python package (for making HTTP requests)
-- (Optional) `systemd` for logging to system journal
+- External services:
+  - Signal REST API server (e.g., signal-cli-rest-api (https://github.com/bbernhard/signal-cli-rest-api))
+- Python libraries:
+  - argsparse
+  - json
+  - os
+  - random
+  - time
+  - requests
+  - systemd
 
 ## Installation
 
