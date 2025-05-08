@@ -48,19 +48,19 @@ jobs:
 
       - name: Set dynamic tag name
         id: date_tag
-        run: echo "TAG_NAME=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
-
+        run: echo "tag_name=$(date +'%Y.%m.%d')" >> $GITHUB_OUTPUT
+      
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.TAG_NAME }}
+          tag_name: ${{ steps.date_tag.outputs.tag_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      
       - name: Upload ZIP to Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.TAG_NAME }}
+          tag_name: ${{ steps.date_tag.outputs.tag_name }}
           files: dist/notify_signal_package.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
