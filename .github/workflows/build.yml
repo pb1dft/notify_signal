@@ -28,7 +28,7 @@ jobs:
         run: pyinstaller --onefile notify_signal.py  # Build the .exe file
 
       - name: Upload EXE as Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2  # Use a specific release
         with:
-          name: notify_signal.exe  # Artifact name
-          path: dist/notify_signal.exe  # Path to the output .exe file
+          name: notify_signal-exe
+          path: dist/notify_signal.exe
