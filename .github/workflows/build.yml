@@ -43,7 +43,7 @@ jobs:
       - name: Create release package
         run: |
           cd dist
-          powershell -Command "Compress-Archive -Path notify_signal.exe, notify_signal_config.json -DestinationPath notifi_signal_package.zip"
+          powershell -Command "Compress-Archive -Path notify_signal.exe, notify_signal_config.json -DestinationPath notify_signal_package.zip"
 
       - name: Upload package
         uses: actions/upload-artifact@v4
