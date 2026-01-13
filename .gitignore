@@ -1,3 +1,4 @@
 # Local ignores for this repo
 # Keep private AI guidance out of source control
 copilot-instructions.md
+.venv
