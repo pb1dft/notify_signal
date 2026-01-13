@@ -1,0 +1,3 @@
+# Local ignores for this repo
+# Keep private AI guidance out of source control
+.github/copilot-instructions.md
